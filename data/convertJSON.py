@@ -2,7 +2,7 @@ import json
 from os import listdir
 from os.path import isfile, join
 
-data = json.load("instances_train2014.json")
+data = json.load(open("instances_train2014.json"))
 
 from os import walk
 
@@ -13,6 +13,9 @@ for (dirpath, dirnames, filenames) in walk("/home/sunand/sunandFastMask/data"):
 
 count = 0
 tempList = []
+info = data["info"]
+newJson = open("tempJson.json", "w")
+json.dump(info, newJson)
 for i in range(500):
 
 	if data["images"][i]["images"] in f:

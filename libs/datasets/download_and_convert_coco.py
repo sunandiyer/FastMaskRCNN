@@ -371,12 +371,19 @@ def _add_to_tfrecord_trainvalsplit(record_dir, image_dir, annotation_dir, split_
         
         cnt = 0
         shard_id = -1
+        f = []
+        for (dirpath, dirnames, filenames) in walk("/home/sunand/sunandFastMask/data"):
+            f.extend(filenames)
+            break
         for i in range(len(imgs)):
             img_id = imgs[i][0]
             img_name = imgs[i][1]['file_name']
+            if img_name not in f:
+              continue
             split = img_name.split('_')[1]
-            img_name = os.path.join(image_dir, split, img_name)
-
+            #img_name = os.path.join(image_dir, split, img_name)
+            img_name = os.path.join("/home/sunand/sunandFastMask/data", split, img_name)
+            
             if str(img_id) == '320612':
                 continue
             is_minival = is_in_minival(img_id, minival)
